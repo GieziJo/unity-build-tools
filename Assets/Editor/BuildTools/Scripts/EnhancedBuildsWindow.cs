@@ -230,7 +230,6 @@ namespace Himeki.Build
 
                 drawScenesSectionGUI(b);
                 drawAdvancedOptionsSectionGUI(b);
-                drawVRSectionGUI(b);
             }
         }
 
@@ -335,37 +334,6 @@ namespace Himeki.Build
 
                 EditorGUI.indentLevel--;
             }
-        }
-
-        private void drawVRSectionGUI(BuildSetupEntry b)
-        {
-            #if UNITY_2017_2_OR_NEWER
-            var targetGroup = BuildPipeline.GetBuildTargetGroup(b.target);
-            if(VRUtils.targetGroupSupportsVirtualReality(targetGroup))
-            {
-                b.supportsVR = EditorGUILayout.Toggle("VR Support", b.supportsVR);
-                if (b.supportsVR)
-                {
-                    b.guiShowVROptions = EditorGUILayout.Foldout(b.guiShowVROptions, "VR Options");
-                    if (b.guiShowVROptions)
-                    {
-                        EditorGUI.indentLevel++;
-
-                        var vrSdks = VRUtils.getAvailableVRSdks(targetGroup);
-                        if (vrSdks.Length > 0)
-                        {
-                            b.vrSdkFlags = EditorGUILayout.MaskField("VR SDKs", b.vrSdkFlags, vrSdks);
-                        }
-                        else
-                        {
-                            GUILayout.Label("No VR SDK available for the current build target.");
-                        }
-
-                        EditorGUI.indentLevel--;
-                    }
-                }
-            }
-            #endif
         }
 
         private void buildGame()

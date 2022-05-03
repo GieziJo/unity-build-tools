@@ -12,8 +12,6 @@ namespace Himeki.Build
         private ManagedStrippingLevel strippingLevel;
 #endif
         public bool androidAppBundleEnabled;
-        private bool vrSupported;
-        private string[] vrSdks;
 
         public void takeSnapshot(BuildTargetGroup targetGroup)
         {
@@ -25,11 +23,6 @@ namespace Himeki.Build
 #if UNITY_2018_3_OR_NEWER
             strippingLevel = PlayerSettings.GetManagedStrippingLevel(targetGroup);
 #endif
-
-#if UNITY_2017_2_OR_NEWER
-            vrSupported = PlayerSettings.GetVirtualRealitySupported(targetGroup);
-#endif
-            vrSdks = VRUtils.getAvailableVRSdks(targetGroup);
 
 #if UNITY_2017_4_OR_NEWER
             androidAppBundleEnabled = EditorUserBuildSettings.buildAppBundle;
@@ -47,11 +40,6 @@ namespace Himeki.Build
 
 #if UNITY_2017_4_OR_NEWER
             EditorUserBuildSettings.buildAppBundle = androidAppBundleEnabled;
-#endif
-
-#if UNITY_2017_2_OR_NEWER
-            PlayerSettings.SetVirtualRealitySupported(buildTargetGroup, vrSupported);
-            PlayerSettings.SetVirtualRealitySDKs(buildTargetGroup, vrSdks);
 #endif
 
         }

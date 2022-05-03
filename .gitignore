@@ -11,3 +11,6 @@ ProjectSettings
 Logs
 UnityPackageManager
 UserSettings
+.idea
+App.config
+packages.config

@@ -45,22 +45,6 @@ namespace Himeki.Build
                     PlayerSettings.SetManagedStrippingLevel(targetGroup, setup.strippingLevel);
 #endif
 
-#if UNITY_2017_2_OR_NEWER
-                    if(VRUtils.targetGroupSupportsVirtualReality(targetGroup))
-                    {
-                        PlayerSettings.SetVirtualRealitySupported(targetGroup, setup.supportsVR);
-                        if (setup.supportsVR)
-                        {
-                            var vrSdks = VRUtils.getSelectedVRSdksFromFlags(targetGroup, setup.vrSdkFlags);
-                            PlayerSettings.SetVirtualRealitySDKs(targetGroup, vrSdks);
-                        }
-                    }
-                    else
-                    {
-                        PlayerSettings.SetVirtualRealitySupported(targetGroup, false);
-                    }
-#endif
-
                     if (target == BuildTarget.Android)
                     {
                         #if UNITY_2017_4_OR_NEWER
